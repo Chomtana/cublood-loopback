@@ -16,7 +16,8 @@
       "required": true
     },
     "emailVerified": "boolean",
-    "verificationToken": "string"
+    "verificationToken": "string",
+    "isApproved" : "boolean"
   },
   "options": {
     "caseSensitiveEmail": true
