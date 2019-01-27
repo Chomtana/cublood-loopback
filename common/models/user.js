@@ -94,6 +94,19 @@ module.exports = function(User) {
       response = 'Sorry, we are closed. Open daily from 6am to 8pm.';
     }
     cb(null, response);
+    
+    User.remoteMethod(
+      'status', {
+        http: {
+          path: '/status',
+          verb: 'get'
+        },
+        returns: {
+          arg: 'status',
+          type: 'string'
+        }
+      }
+    );
   };
 
   /* end cu blood extened */
