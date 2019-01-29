@@ -83,10 +83,6 @@ module.exports = function(User) {
   User.greet = async function(msg) {
     return 'Greetings... ' + msg;
   }
-  User.remoteMethod('greet', {
-        accepts: {arg: 'msg', type: 'string'},
-        returns: {arg: 'greeting', type: 'string'}
-  });
   /* end cu blood extened */
 
 
@@ -1189,6 +1185,15 @@ module.exports = function(User) {
       }
     );
 
+    /* cu blood */
+    UserModel.remoteMethod('greet', {
+      description: 'test api',
+      accepts: {arg: 'msg', type: 'string'},
+      http: {verb: 'get', path: '/greet'},
+      returns: {arg: 'greeting', type: 'string'}
+    });
+    /* end cu blood api */
+  
     UserModel.remoteMethod(
       'resetPassword',
       {
