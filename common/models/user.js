@@ -77,17 +77,6 @@ var debug = require('debug')('loopback:user');
  */
 
 module.exports = function(User) {
-
-
-  /* cu blood extened */
-  User.greet = async function(msg) {
-    return 'Greetings... ' + msg;
-  }
-  /* end cu blood extened */
-
-
-
-
   /**
    * Create access token for the logged in user. This method can be overridden to
    * customize how access tokens are generated
@@ -1186,11 +1175,14 @@ module.exports = function(User) {
     );
 
     /* cu blood */
-    UserModel.remoteMethod('greet', {
+    User.mail = async function(msg) {
+      return 'mymail... ' + msg;
+    }
+    UserModel.remoteMethod('mail', {
       description: 'test api',
       accepts: {arg: 'msg', type: 'string'},
-      http: {verb: 'get', path: '/greet'},
-      returns: {arg: 'greeting', type: 'string'}
+      http: {verb: 'get', path: '/mail'},
+      returns: {arg: 'mail', type: 'string'}
     });
     /* end cu blood api */
   
