@@ -17,6 +17,7 @@
     },
     "emailVerified": "boolean",
     "verificationToken": "string",
+    "isAdmin" : "boolean",
     "isApproved" : "boolean",
     "firstName" : "string",
     "lastName" : "string",
