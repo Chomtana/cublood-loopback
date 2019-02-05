@@ -28,7 +28,6 @@
     "lineId" : "string",
     "facebook" : "string",
     "team" : "object"
-    //{"season61": "Event", "season62": "PR"}
   },
   "options": {
     "caseSensitiveEmail": true
