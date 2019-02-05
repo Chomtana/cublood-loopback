@@ -17,7 +17,18 @@
     },
     "emailVerified": "boolean",
     "verificationToken": "string",
-    "isApproved" : "boolean"
+    "isApproved" : "boolean",
+    "firstName" : "string",
+    "lastName" : "string",
+    "nickName" : "string",
+    "gender" : "string",
+    "studentNumber" : "string",
+    "faculty" : "string",
+    "year" : "string",
+    "lineId" : "string",
+    "facebook" : "string",
+    "team" : "object"
+    //{"season61": "Event", "season62": "PR"}
   },
   "options": {
     "caseSensitiveEmail": true
