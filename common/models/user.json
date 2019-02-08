@@ -118,7 +118,7 @@
     },
     {
       "accessType": "READ",
-      "principalType": "ROLE",
+      "principalType": "USER",
       "principalId": "admin",
       "permission": "ALLOW",
       "property": "find"
