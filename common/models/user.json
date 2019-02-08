@@ -120,7 +120,7 @@
       "principalType": "ROLE",
       "principalId": "admin",
       "permission": "ALLOW"
-    },
+    }
   ],
   "relations": {
     "accessTokens": {
