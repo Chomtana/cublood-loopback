@@ -117,9 +117,11 @@
       "accessType": "EXECUTE"
     },
     {
+      "accessType": "READ",
       "principalType": "ROLE",
       "principalId": "$everyone",
-      "permission": "ALLOW"
+      "permission": "ALLOW",
+      "property": "find"
     }
   ],
   "relations": {
