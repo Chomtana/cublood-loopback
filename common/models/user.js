@@ -1088,16 +1088,17 @@ module.exports = function(User) {
     this.settings.ttl = this.settings.ttl || DEFAULT_TTL;
 
     function restrict_adminonly(ctx,user_,next) {
+      //console.log(ctx.req.params)
       var uid = getUserIdFromRequestContext(ctx);
       User.findById(uid, function(err,user) {
         if (err) return next(err);
         if (user.isAdmin) {
           return next();
         } else {
-          if (ctx.req.path.id == uid) {
+          if (ctx.req.params.id == uid) {
             if (ctx.req.body) {
-              ctx.req.body.isAdmin = false;
-              ctx.req.body.isApproved = user.isApproved;
+              delete ctx.req.body.isAdmin;
+              delete ctx.req.body.isApproved;
             }
             return next();
           }
@@ -1107,6 +1108,7 @@ module.exports = function(User) {
     }
 
     function restrict_field(ctx,user_,next) {
+      //console.log(user_)
       var uid = getUserIdFromRequestContext(ctx);
       User.findById(uid, function(err,user) {
         if (err) return next(err);
@@ -1114,8 +1116,8 @@ module.exports = function(User) {
           return next();
         }
         if (ctx.req.body) {
-          ctx.req.body.isAdmin = false;
-          ctx.req.body.isApproved = user.isApproved;
+          delete ctx.req.body.isAdmin;
+          delete ctx.req.body.isApproved;
         }
         return next();
       });
@@ -1127,7 +1129,7 @@ module.exports = function(User) {
     UserModel.beforeRemote('upsertWithWhere',restrict_adminonly)
     UserModel.beforeRemote('replaceById',restrict_adminonly)
     UserModel.beforeRemote('deleteById',restrict_adminonly)
-    UserModel.beforeRemote('patchAttributes',restrict_adminonly)
+    UserModel.beforeRemote('prototype.patchAttributes',restrict_adminonly)
 
     UserModel.setter.email = function(value) {
       if (!UserModel.settings.caseSensitiveEmail && typeof value === 'string') {
