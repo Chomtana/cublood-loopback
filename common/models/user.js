@@ -1089,6 +1089,48 @@ module.exports = function(User) {
     this.settings.maxTTL = this.settings.maxTTL || DEFAULT_MAX_TTL;
     this.settings.ttl = this.settings.ttl || DEFAULT_TTL;
 
+    function restrict_adminonly(ctx,user_,next) {
+      var uid = getUserIdFromRequestContext(ctx);
+      User.findById(uid, function(err,user) {
+        if (err) return next(err);
+        if (user.isAdmin) {
+          return next();
+        } else {
+          if (ctx.req.path.id == uid) {
+            if (ctx.req.body) {
+              ctx.req.body.isAdmin = false;
+              ctx.req.body.isApproved = user.isApproved;
+            }
+            return next();
+          }
+          return next("403 Forbidden, Admin Only")
+        }
+      });
+    }
+
+    function restrict_field(ctx,user_,next) {
+      var uid = getUserIdFromRequestContext(ctx);
+      User.findById(uid, function(err,user) {
+        if (err) return next(err);
+        if (user.isAdmin) {
+          return next();
+        }
+        if (ctx.req.body) {
+          ctx.req.body.isAdmin = false;
+          ctx.req.body.isApproved = user.isApproved;
+        }
+        return next();
+      });
+    }
+
+    UserModel.beforeRemote('create',restrict_field)
+    UserModel.beforeRemote('patchOrCreate',restrict_adminonly)
+    UserModel.beforeRemote('replaceOrCreate',restrict_adminonly)
+    UserModel.beforeRemote('upsertWithWhere',restrict_adminonly)
+    UserModel.beforeRemote('replaceById',restrict_adminonly)
+    UserModel.beforeRemote('deleteById',restrict_adminonly)
+    UserModel.beforeRemote('patchAttributes',restrict_adminonly)
+
     UserModel.setter.email = function(value) {
       if (!UserModel.settings.caseSensitiveEmail && typeof value === 'string') {
         this.$email = value.toLowerCase();
