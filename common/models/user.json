@@ -115,13 +115,6 @@
       "permission": "ALLOW",
       "property": "setPassword",
       "accessType": "EXECUTE"
-    },
-    {
-      "accessType": "READ",
-      "principalType": "ROLE",
-      "principalId": "admin",
-      "permission": "ALLOW",
-      "property": "find"
     }
   ],
   "relations": {

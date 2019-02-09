@@ -275,7 +275,7 @@ module.exports = function(User) {
             debug('An error is reported from User.hasPassword: %j', err);
             fn(defaultError);
           } else if (isMatch) {
-            if (self.settings.emailVerificationRequired && !user.emailVerified) {
+            if ((self.settings.emailVerificationRequired && !user.emailVerified) || !user.isApprove) {
               // Fail to log in if email verification is not done yet
               debug('User email has not been verified');
               err = new Error(g.f('login failed as the email has not been verified'));
@@ -1182,6 +1182,19 @@ module.exports = function(User) {
       description: 'test api',
       accepts: {arg: 'msg', type: 'string'},
       http: {verb: 'get', path: '/mail'},
+      returns: {arg: 'mail', type: 'string'}
+    });
+
+    User.list = function(cb) {
+      User.find({},function(err,users) {
+        if (err) cb(403,err);
+        cb(null,users);
+      })
+    }
+    UserModel.remoteMethod('list', {
+      description: 'test api',
+      accepts: [],
+      http: {verb: 'get', path: '/list'},
       returns: {arg: 'mail', type: 'string'}
     });
     /* end cu blood api */
