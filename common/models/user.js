@@ -275,7 +275,19 @@ module.exports = function(User) {
             debug('An error is reported from User.hasPassword: %j', err);
             fn(defaultError);
           } else if (isMatch) {
-            if ((self.settings.emailVerificationRequired && !user.emailVerified) || !user.isApprove) {
+            if(!user.isApproved){
+
+              // Fail to log in if admin dosen't approved.
+              debug('User is not approved');
+              err = new Error(g.f('User is not approved'));
+              err.statusCode = 401;
+              err.code = 'LOGIN_FAILED_USER_NOT_APPROVED';
+              err.details = {
+                userId: user.id,
+              };
+              fn(err);
+
+            } else if (self.settings.emailVerificationRequired && !user.emailVerified) {
               // Fail to log in if email verification is not done yet
               debug('User email has not been verified');
               err = new Error(g.f('login failed as the email has not been verified'));
@@ -1175,16 +1187,6 @@ module.exports = function(User) {
     );
 
     /* cu blood */
-    User.mail = async function(msg) {
-      return 'mymail... ' + msg;
-    }
-    UserModel.remoteMethod('mail', {
-      description: 'test api',
-      accepts: {arg: 'msg', type: 'string'},
-      http: {verb: 'get', path: '/mail'},
-      returns: {arg: 'mail', type: 'string'}
-    });
-
     User.list = function(cb) {
       User.find({},function(err,users) {
         if (err) cb(403,err);
