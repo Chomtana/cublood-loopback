@@ -1,5 +1,6 @@
 {
   "name": "User",
+  "strict": true,
   "properties": {
     "realm": {
       "type": "string"
@@ -33,7 +34,7 @@
   "options": {
     "caseSensitiveEmail": true
   },
-  "hidden": ["password", "verificationToken"],
+  "hidden": ["verificationToken"],
   "acls": [
     {
       "principalType": "ROLE",
