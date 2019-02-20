@@ -1110,6 +1110,13 @@ module.exports = function(User) {
     function restrict_create(ctx,user_,next) {
       //console.log(user_)
       var uid = getUserIdFromRequestContext(ctx);
+      if (!uid) {
+        if (ctx.req.body) {
+          ctx.req.body.isAdmin = false;
+          ctx.req.body.isApproved = false;
+        }
+        return next();
+      }
       User.findById(uid, function(err,user) {
         if (err) return next(err);
         if (user.isAdmin) {
