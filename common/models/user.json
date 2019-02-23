@@ -30,7 +30,7 @@
     "lineId" : "string",
     "facebook" : "string",
     "phoneNumber" : "string",
-    "team" : "object"
+    "team" : "string"
   },
   "options": {
     "caseSensitiveEmail": true
