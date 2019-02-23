@@ -29,6 +29,7 @@
     "year" : "string",
     "lineId" : "string",
     "facebook" : "string",
+    "phoneNumber" : "string",
     "team" : "object"
   },
   "options": {
