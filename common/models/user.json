@@ -93,7 +93,13 @@
       "permission": "ALLOW",
       "property": "setPassword",
       "accessType": "EXECUTE"
-    }
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$owner",
+      "permission": "ALLOW",
+      "property": "findById"
+    },
   ],
   "relations": {
     "accessTokens": {

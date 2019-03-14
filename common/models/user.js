@@ -1250,7 +1250,7 @@ module.exports = function(User) {
     );
 
     /* cu blood */
-    User.list = function(cb) {
+    /*User.list = function(cb) {
       User.find({},function(err,users) {
         if (err) cb(403,err);
         cb(null,users);
@@ -1261,7 +1261,7 @@ module.exports = function(User) {
       accepts: [],
       http: {verb: 'get', path: '/list'},
       returns: {arg: 'mail', type: 'string'}
-    });
+    });*/
     /* end cu blood api */
   
     UserModel.remoteMethod(
