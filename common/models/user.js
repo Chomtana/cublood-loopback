@@ -1150,17 +1150,17 @@ module.exports = function(User) {
     UserModel.beforeRemote('replaceById',restrict_adminonly)
     UserModel.beforeRemote('deleteById',restrict_adminonly)
     UserModel.beforeRemote('prototype.patchAttributes',restrict_adminonly)
+    UserModel.beforeRemote('prototype.updateAttributes',restrict_adminonly)
+    UserModel.beforeRemote('updateAll',restrict_adminonly)
+    UserModel.beforeRemote('update',restrict_adminonly)
     UserModel.beforeRemote('find',restrict_isAdmin)
 
     UserModel.disableRemoteMethodByName('upsert');
     UserModel.disableRemoteMethodByName('upsertWithWhere');
-    UserModel.disableRemoteMethodByName('updateAll');
-    UserModel.disableRemoteMethodByName('prototype.updateAttributes');
     UserModel.disableRemoteMethodByName('findOne');
     UserModel.disableRemoteMethodByName('confirm');
     UserModel.disableRemoteMethodByName('exists');
     UserModel.disableRemoteMethodByName('resetPassword');
-    UserModel.disableRemoteMethodByName('update');
 
     UserModel.disableRemoteMethodByName('prototype.__count__accessTokens');
     UserModel.disableRemoteMethodByName('prototype.__create__accessTokens');
