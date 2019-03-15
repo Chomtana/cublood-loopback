@@ -1153,6 +1153,7 @@ module.exports = function(User) {
     UserModel.beforeRemote('find',restrict_isAdmin)
 
     UserModel.disableRemoteMethodByName('upsert');
+    UserModel.disableRemoteMethodByName('upsertWithWhere');
     UserModel.disableRemoteMethodByName('updateAll');
     UserModel.disableRemoteMethodByName('prototype.updateAttributes');
     UserModel.disableRemoteMethodByName('findOne');
