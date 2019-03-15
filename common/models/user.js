@@ -1152,6 +1152,14 @@ module.exports = function(User) {
     UserModel.beforeRemote('prototype.patchAttributes',restrict_adminonly)
     UserModel.beforeRemote('find',restrict_isAdmin)
 
+    UserModel.disableRemoteMethod('__count__accessTokens', false);
+    UserModel.disableRemoteMethod('__create__accessTokens', false);
+    UserModel.disableRemoteMethod('__delete__accessTokens', false);
+    UserModel.disableRemoteMethod('__destroyById__accessTokens', false);
+    UserModel.disableRemoteMethod('__findById__accessTokens', false);
+    UserModel.disableRemoteMethod('__get__accessTokens', false);
+    UserModel.disableRemoteMethod('__updateById__accessTokens', false);
+
     UserModel.setter.email = function(value) {
       if (!UserModel.settings.caseSensitiveEmail && typeof value === 'string') {
         this.$email = value.toLowerCase();
