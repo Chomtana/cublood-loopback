@@ -1152,13 +1152,22 @@ module.exports = function(User) {
     UserModel.beforeRemote('prototype.patchAttributes',restrict_adminonly)
     UserModel.beforeRemote('find',restrict_isAdmin)
 
-    UserModel.disableRemoteMethod('__count__accessTokens', false);
-    UserModel.disableRemoteMethod('__create__accessTokens', false);
-    UserModel.disableRemoteMethod('__delete__accessTokens', false);
-    UserModel.disableRemoteMethod('__destroyById__accessTokens', false);
-    UserModel.disableRemoteMethod('__findById__accessTokens', false);
-    UserModel.disableRemoteMethod('__get__accessTokens', false);
-    UserModel.disableRemoteMethod('__updateById__accessTokens', false);
+    UserModel.disableRemoteMethodByName('upsert');
+    UserModel.disableRemoteMethodByName('updateAll');
+    UserModel.disableRemoteMethodByName('prototype.updateAttributes');
+    UserModel.disableRemoteMethodByName('findOne');
+    UserModel.disableRemoteMethodByName('confirm');
+    UserModel.disableRemoteMethodByName('exists');
+    UserModel.disableRemoteMethodByName('resetPassword');
+    UserModel.disableRemoteMethodByName('update');
+
+    UserModel.disableRemoteMethodByName('prototype.__count__accessTokens');
+    UserModel.disableRemoteMethodByName('prototype.__create__accessTokens');
+    UserModel.disableRemoteMethodByName('prototype.__delete__accessTokens');
+    UserModel.disableRemoteMethodByName('prototype.__destroyById__accessTokens');
+    UserModel.disableRemoteMethodByName('prototype.__findById__accessTokens');
+    UserModel.disableRemoteMethodByName('prototype.__get__accessTokens');
+    UserModel.disableRemoteMethodByName('prototype.__updateById__accessTokens');
 
     UserModel.setter.email = function(value) {
       if (!UserModel.settings.caseSensitiveEmail && typeof value === 'string') {
